@@ -11,7 +11,7 @@ module.exports = {
       }
     },
     screens: {
-      "2xl": { 'max': '1700px' },
+      "2xl": { 'max': '2000px' },
       'xl': { 'max': '1200px' },
       'lg': { 'max': '1080px' },
       'md-lg': { 'max': '991px' },
