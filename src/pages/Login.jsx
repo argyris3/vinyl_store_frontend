@@ -1,0 +1,141 @@
+import React, { useState, useEffect } from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { FaGoogle } from "react-icons/fa6";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { customer_login, messageClear } from "../store/reducers/authReducer";
+import toast from "react-hot-toast";
+import { FadeLoader } from "react-spinners";
+
+const Login = () => {
+  const navigate = useNavigate();
+  const { loader, errorMessage, successMessage, userInfo } = useSelector(
+    (state) => state.auth
+  );
+  const dispatch = useDispatch();
+
+  const [state, setState] = useState({
+    password: "",
+    email: "",
+  });
+  const inputHandle = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const login = (e) => {
+    e.preventDefault();
+    dispatch(customer_login(state));
+  };
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [successMessage, errorMessage]);
+  return (
+    <div className="bg-slate-400">
+      {loader && (
+        <div className="w-screen h-screen flex justify-center items-center fixed left-0 top-0 bg-[#38303033] z-[999]">
+          <FadeLoader />
+        </div>
+      )}
+      <Header />
+      <div className="bg-gray-600 mt-4">
+        <div className="w-full justify-center items-center p-10">
+          <div className="grid grid-cols-2 md:grid-cols-1 w-[70%] mx-auto bg-white rounded-md">
+            <div className="px-8 py-8">
+              <h2 className="text-center w-full text-xl text-slate-600 font-bold">
+                Login{" "}
+              </h2>
+
+              <div>
+                <form onSubmit={login} className="text-slate-600">
+                  <div className="flex flex-col gap-1 mb-2">
+                    <label htmlFor="email">Email</label>
+                    <input
+                      onChange={inputHandle}
+                      value={state.email}
+                      className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-slate-500 rounded-md"
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="Email"
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1 mb-2">
+                    <label htmlFor="password">Password</label>
+                    <input
+                      onChange={inputHandle}
+                      value={state.password}
+                      className="w-full px-3 py-2 border border-slate-200 outline-none focus:border-slate-500 rounded-md"
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Password"
+                      required
+                    />
+                  </div>
+
+                  <button className="px-8 w-full py-2 bg-slate-600 shadow-lg hover:shadow-slate-500/40 text-white rounded-md">
+                    Login
+                  </button>
+                </form>
+                <div className="flex justify-center items-center py-2">
+                  <div className="h-[1px] bg-slate-300 w-[90%]"></div>
+                  <span className="px-3 text-slate-600">Or</span>
+                  <div className="h-[1px] bg-slate-300 w-[90%]"></div>
+                </div>
+
+                <button className="px-6 w-full py-2 bg-slate-800 shadow hover:shadow-slate-950 text-white rounded-md flex justify-center items-center gap-2 mb-3">
+                  <span>
+                    <FaGoogle />
+                  </span>
+                  <span>Login with Google</span>
+                </button>
+              </div>
+              <div className="text-center text-slate-900 pt-1">
+                <p>
+                  Don't you have an Account?
+                  <Link className="text-gray-700 font-bold" to="/register">
+                    Register
+                  </Link>{" "}
+                </p>
+              </div>
+              <a target="_blank" href="http://localhost:3001/login">
+                <div className="px-4 w-full py-2 bg-[#000622] shadow hover:shadow-slate-500/50 text-white rounded-md flex justify-center items-center gap-2 mb-3">
+                  Login As a Seller
+                </div>
+              </a>
+
+              <a target="_blank" href="http://localhost:3001/register">
+                <div className="px-4 w-full py-2 bg-[#000622]  hover:shadow-slate-500/50 text-white rounded-md flex justify-center items-center gap-2 mb-3">
+                  Register As a Seller
+                </div>
+              </a>
+            </div>
+            <div className="w-full h-full py-4 pr-4 md:hidden">
+              <img src="http://localhost:3000/registerShop.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Login;
