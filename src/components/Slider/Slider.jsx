@@ -59,7 +59,7 @@ const Slider = () => {
   });
 
   return (
-    <section className="mt-5  relative  2xs:hidden xs:hidden sm:hidden  md:hidden lg:h-[500px]  xl:h-[500px] 2xl:h-[500px] 3xl:h-[700px]  overflow-hidden antialiased">
+    <section className="mt-5  relative  2xs:hidden xs:hidden sm:hidden  md:hidden lg:h-[500px]  xl:h-[500px] 2xl:h-[500px]   overflow-hidden antialiased">
       <AnimatePresence>
         <BackGroundImage
           transitionData={transitionData}

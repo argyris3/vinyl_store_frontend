@@ -1,8 +1,8 @@
 import axios from "axios";
 const local = 'http://localhost:8001'
-const production = 'http://localhost:6001'
+const production = 'https://vinyl-store-backend-hfjx.onrender.com'
 let api_url = ''
-let mode = "pro"
+let mode = "pro "
 if (mode === "pro") {
     api_url = production
 } else {
