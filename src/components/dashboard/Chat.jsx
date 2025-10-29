@@ -15,7 +15,7 @@ import {
   updateMessage,
   messageClear,
 } from "../../store/reducers/chatReducer";
-const socket = io("https://vinyl-store-backend-k4g7.onrender.com'");
+const socket = io("https://vinyl-store-backend-k4g7.onrender.com");
 
 const Chat = () => {
   const scrollRef = useRef();
