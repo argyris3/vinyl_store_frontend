@@ -97,7 +97,7 @@ const Shops = () => {
   return (
     <section className="bg-slate-700">
       <Header />
-      <div className="bg-[url('http://localhost:3000/shopLogo.jpg')] h-[220px] mt-6 bg-cover bg-no-repeat relative bg-bottom">
+      <div className="bg-shopLogo h-[220px] mt-6 bg-cover bg-no-repeat relative bg-bottom">
         <div className="absolute left-0 top-0 w-full h-full  bg-[#2422228a]">
           <div className="w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto">
             <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-slate-400 ">
